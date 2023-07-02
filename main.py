@@ -8,6 +8,7 @@ class CurrencyConverter:
         #self.currncies_api_url = 'https://api.freecurrencyapi.com/v1/currencies'- if necessary to fetch the supported currency list as rturn output 
 
     # user_input error handling - if input string or negative value  
+    # only error handling included but no exceptions are thrown  
     def get_user_input(self):
         amount = 0
         while amount <= 0: 
@@ -45,7 +46,7 @@ class CurrencyConverter:
 
         return amount, source_currency, target_currency
 
-   
+
     def get_exchange_rate(self, source_currency, target_currency):
         params = {
             'apikey': self.api_key,
@@ -56,6 +57,7 @@ class CurrencyConverter:
 
         # handling HTTP response headers. See https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
         # HTTP handling in API necessary documented in API documentation. See https://freecurrencyapi.com/docs/#authentication-methods
+        # no error handling but during the  get_exchange_rate , only in an error exceptions are thrown 
 
         if 401 == response.status_code:
             raise Exception('API authentication failed. Invalid API key provided. Unable to access the API')
