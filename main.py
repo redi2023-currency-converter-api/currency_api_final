@@ -46,9 +46,12 @@ class CurrencyConverter:
         # throwing resulting errors to the caller
         response.raise_for_status()
         data = response.json()
+        
         assert 'data' in data, 'Malformed json response from the REST API. The element \'data\' not found'
         rates = data['data']
 
+        assert target_currency in rates, 'Target currency is not supported by the API'
+             
         return rates[target_currency]
     
     # Convert the currencies with help of the exchange rates feteched from the API
